@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import util.Config;
 import util.DiscordBroadcast;
+import util.DiscordBroadcastMessages;
 
 import java.awt.*;
 
@@ -19,29 +20,28 @@ public class BroadcastMessageReaction extends ListenerAdapter {
         Member member = event.getMember();
 
         // The bot's own message should be ignored here
-        if (event.getJDA().getSelfUser().equals(member.getUser())) {
-            return;
-        }
-
         // The message should only be considered if it is a broadcast channel
-        if (!messageChannel.getId().equals(Config.broadcast_channel)) {
+        if (event.getJDA().getSelfUser().equals(member.getUser()) |
+                !messageChannel.getId().equals(Config.broadcast_channel)) {
             return;
         }
 
         // Only continue if the user is entered as an admin
         if (!Config.bot_admins.contains(member.getUser().getId())) {
-            messageChannel.sendMessage(new EmbedBuilder()
-                            .setColor(Color.yellow)
-                            .setTitle("Not registered as admin")
-                            .setDescription("You are not registered as an admin!")
-                            .build())
-                    .queue();
+            messageChannel.sendMessage(DiscordBroadcastMessages.getAuthorizationMessage(member.getUser().getAsTag())).queue();
             return;
         }
 
+        // If no message is defined, none can be sent
         if (Config.message_temp.length() == 0) {
-            messageChannel.sendMessage("No message could be found!").queue();
-            messageChannel.deleteMessageById(event.getMessageId());
+            messageChannel.sendMessage(DiscordBroadcastMessages.getNoMessageFoundMessage()).queue();
+            messageChannel.deleteMessageById(event.getMessageId()).queue();
+            return;
+        }
+
+        // Only allow a message to be sent if it is active
+        if(!Config.active_messages.contains(event.getMessageId())){
+            messageChannel.sendMessage(DiscordBroadcastMessages.getCannotSentMessage()).queue();
             return;
         }
 
@@ -53,7 +53,7 @@ public class BroadcastMessageReaction extends ListenerAdapter {
                 for (String channel_id : item.broadcast_target_channel) {
                     TextChannel textChannel = event.getGuild().getTextChannelById(channel_id);
                     textChannel.sendMessage(new EmbedBuilder()
-                                    .setTitle(Config.message_title.length() == 0 ? "Notification" : Config.message_title)
+                                    .setTitle(Config.message_title)
                                     .setColor(Color.WHITE)
                                     .setDescription(Config.message_temp + " <@&"+ Config.broadcast_guild+">")
                                     .build())
@@ -67,14 +67,13 @@ public class BroadcastMessageReaction extends ListenerAdapter {
                 .sendMessage(
                         new EmbedBuilder()
                                 .setColor(Color.green)
-                                .setTitle("Done with the execution")
+                                .setTitle("✅ Done with the execution")
                                 .setDescription(getMessageDescription(discord_broadcast, event))
                                 .setFooter(getMessageFooter(discord_broadcast, event))
                                 .build())
                 .queue();
 
-        // Reset the buffer
-        Config.message_temp = "";
+        Config.message_temp = ""; // Reset the buffer
         // The message for the query should be removed
         messageChannel.deleteMessageById(reaction.getMessageId()).queue();
     }
@@ -90,7 +89,8 @@ public class BroadcastMessageReaction extends ListenerAdapter {
     private String getMessageDescription(DiscordBroadcast value, GuildMessageReactionAddEvent event) {
         StringBuilder builder = new StringBuilder();
         builder.append("You have sent this message:\r\n");
-        builder.append(Config.message_temp);
+        builder.append("Title: " + Config.message_title);
+        builder.append("\r\nMessage: " + Config.message_temp);
         return builder.toString();
     }
 }
