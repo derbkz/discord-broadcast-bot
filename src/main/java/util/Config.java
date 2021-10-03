@@ -7,9 +7,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class Config {
-    public static List<String> active_messages = new ArrayList<>(); // Is required to buffer valid broadcasts for a session
     public static List<DiscordBroadcast> broadcasts; // All broadcast methods as a list from the config
     public static List<String> bot_admins; // Is required for the examination of the admins
+    public static String active_message = ""; // Is required to buffer valid broadcasts for a session
     public static String broadcast_channel = ""; // Is required to identify the channel for the broadcast
     public static String broadcast_guild = ""; // Is required for the group of all clients
     public static String bot_token = ""; // Is required to connect the DiscordBot

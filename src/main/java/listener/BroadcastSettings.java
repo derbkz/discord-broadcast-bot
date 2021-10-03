@@ -1,6 +1,5 @@
 package listener;
 
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -10,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import util.Config;
 import util.DiscordBroadcastMessages;
 
-import java.awt.*;
-import java.util.Locale;
 
 public class BroadcastSettings extends ListenerAdapter {
     @Override

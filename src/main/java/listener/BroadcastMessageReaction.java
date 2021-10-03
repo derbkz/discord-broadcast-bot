@@ -40,7 +40,7 @@ public class BroadcastMessageReaction extends ListenerAdapter {
         }
 
         // Only allow a message to be sent if it is active
-        if(!Config.active_messages.contains(event.getMessageId())){
+        if(!event.getMessageId().equals(Config.active_message)){
             messageChannel.sendMessage(DiscordBroadcastMessages.getCannotSentMessage()).queue();
             return;
         }

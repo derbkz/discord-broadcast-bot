@@ -65,7 +65,7 @@ public class BroadcastMessage extends ListenerAdapter {
                                     msg.addReaction(item.broadcast_emoji).queue();
                                 }
                                 // Add the sent message to the list of active messages
-                                Config.active_messages.add(msg.getId());
+                                Config.active_message = msg.getId();
                             });
             // Cache message
             Config.message_temp = message.getContentDisplay();
