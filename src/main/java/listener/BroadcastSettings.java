@@ -33,6 +33,10 @@ public class BroadcastSettings extends ListenerAdapter {
         }
 
         if(message.getContentDisplay().toLowerCase().startsWith("!title")){
+            if(message.getContentDisplay().substring(6).length() == 0){
+                messageChannel.sendMessage(DiscordBroadcastMessages.getCommandNotFound()).queue();
+                return;
+            }
             Config.message_title = message.getContentDisplay().substring(6);
             messageChannel.sendMessage(DiscordBroadcastMessages.getConfigurationChangedMessage(message.getAuthor().getAsTag())).queue();
             message.delete().queue();
@@ -40,10 +44,6 @@ public class BroadcastSettings extends ListenerAdapter {
         }
 
         switch (message.getContentDisplay()){
-            case "!title":{
-                Config.message_title = message.getContentDisplay().substring(6);
-                break;
-            }
             case "!help":{
                 messageChannel.sendMessage(DiscordBroadcastMessages.getHelpMessage()).queue();
                 break;

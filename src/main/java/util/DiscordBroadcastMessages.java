@@ -29,7 +29,7 @@ public class DiscordBroadcastMessages {
         return new EmbedBuilder()
                 .setColor(Color.yellow)
                 .setTitle("🦉 Command not found!")
-                .setDescription("The command you entered could not be found.")
+                .setDescription("The command you entered could not be found.\r\nHave all commands listed with **!help**")
                 .build();
     }
 
