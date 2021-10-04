@@ -1,8 +1,0 @@
-Version 1.0
-+ The bot was created with the basic functions
-
-Version 1.1
-+ The formatting of the messages has been revised
-+ If you overwrite a cached message, a hint appears
-+ Only one active, cached message can now be sent
-+ Detailed error messages have been added
