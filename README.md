@@ -19,16 +19,15 @@ Broadcast channel is the group where you can define a broadcast.
   "broadcasts": [
     {
       "broadcast_name": "All channels",
-      "broadcast_emoji": "😂",
-      "broadcast_target_channel": ["893264144629919744", "893264169271443467"]
-    },
-     {
-      "broadcast_name": "One channel",
       "broadcast_emoji": "💎",
-      "broadcast_target_channel": ["893264144629919744"]
+      "broadcast_target_channel": ["893264144629919744", "893264169271443467", "893264274166788187"]
+    },
+    {
+      "broadcast_name": "Only two",
+      "broadcast_emoji": "😍",
+      "broadcast_target_channel": ["893264144629919744", "893264169271443467"]
     }
   ]
-}
 }
 ```
 
