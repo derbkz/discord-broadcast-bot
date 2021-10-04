@@ -2,7 +2,35 @@
 Define as many channels as you want on a Discord server in the config to send a message to all desired channels. So you can easily prepare a config once and then always output a message as a broadcast
 
 ## Configuration of the bot 
-Instructions will be available here soon
+The token for the bot can be found on the following website: https://discord.com/developers/applications. 
+
+You can define bot admins who are only allowed to execute the commands.
+
+Broadcast guild will be the group that is tagged in the broadcast.
+
+Broadcast channel is the group where you can define a broadcast.
+
+```json
+{
+  "token": "",
+  "bot_admins": ["278785550935392257", "470715613669621770"],
+  "broadcast_channel": "893261098076229684",
+  "broadcast_guild": "893273507054645280",
+  "broadcasts": [
+    {
+      "broadcast_name": "All channels",
+      "broadcast_emoji": "😂",
+      "broadcast_target_channel": ["893264144629919744", "893264169271443467"]
+    },
+     {
+      "broadcast_name": "One channel",
+      "broadcast_emoji": "💎",
+      "broadcast_target_channel": ["893264144629919744"]
+    }
+  ]
+}
+}
+```
 
 ## Changelog
 Version 1.0 (20211001)
