@@ -15,6 +15,14 @@ public class Main {
 
     public static void main(String[] Args) throws LoginException, IOException {
         Config.loadConfig();
+
+        // Check whether the config has been configured correctly
+        if(Config.error_message.length() != 0){
+            System.out.println(Config.error_message);
+            System.in.read();
+            return;
+        }
+
         JDABuilder builder =
                 (JDABuilder)
                         JDABuilder.createDefault(Config.bot_token)

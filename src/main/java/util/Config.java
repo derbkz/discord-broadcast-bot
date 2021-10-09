@@ -15,6 +15,7 @@ public class Config {
     public static String bot_token = ""; // Is required to connect the DiscordBot
     public static String message_temp = ""; // Is required to temporarily store a message
     public static String message_title = "Notification"; // Is required to set the title of a broadcast message
+    public static String error_message = ""; // All errors are saved here
 
     public static void loadConfig() throws IOException {
         String contentConfig = readConfig();
@@ -27,6 +28,7 @@ public class Config {
         bot_admins = config.bot_admins;
         broadcasts = config.broadcasts;
         bot_token = config.token;
+        checkConfig();
     }
 
     private static String readConfig() throws IOException {
@@ -47,5 +49,19 @@ public class Config {
             line = buf.readLine();
         }
         return sb.toString();
+    }
+
+    private static void checkConfig(){
+        StringBuilder builder = new StringBuilder();
+        if(broadcast_channel.length() == 0){
+            builder.append("- You have not defined a broadcast channel in the config.\r\n");
+        }
+        if(broadcast_guild.length() == 0){
+            builder.append("- You have not defined a group for the message in the config.\r\n");
+        }
+        if(bot_token.length() == 0){
+            builder.append("- You have not entered a token for the bot in the config.\r\n");
+        }
+        error_message = builder.toString();
     }
 }
