@@ -32,6 +32,12 @@ public class BroadcastSettings extends ListenerAdapter {
             return;
         }
 
+        // Check whether the config has been configured correctly
+        if(Config.error_message.length() != 0){
+            System.out.println(Config.error_message);
+            return;
+        }
+
         if(message.getContentDisplay().toLowerCase().startsWith("!title")){
             if(message.getContentDisplay().substring(6).length() == 0){
                 messageChannel.sendMessage(DiscordBroadcastMessages.getCommandNotFound()).queue();

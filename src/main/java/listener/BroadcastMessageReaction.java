@@ -32,6 +32,12 @@ public class BroadcastMessageReaction extends ListenerAdapter {
             return;
         }
 
+        // Check whether the config has been configured correctly
+        if(Config.error_message.length() != 0){
+            System.out.println(Config.error_message);
+            return;
+        }
+
         // If no message is defined, none can be sent
         if (Config.message_temp.length() == 0) {
             messageChannel.sendMessage(DiscordBroadcastMessages.getNoMessageFoundMessage()).queue();

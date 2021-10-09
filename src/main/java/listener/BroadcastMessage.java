@@ -36,6 +36,12 @@ public class BroadcastMessage extends ListenerAdapter {
             return;
         }
 
+        // Check whether the config has been configured correctly
+        if(Config.error_message.length() != 0){
+            System.out.println(Config.error_message);
+            return;
+        }
+
         if (messageChannel.getId().equals(Config.broadcast_channel)) {
             message.delete().queue(); // The sent message should be removed
             // The footer text should be filled with the available emojis.
