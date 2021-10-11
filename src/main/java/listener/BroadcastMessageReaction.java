@@ -58,12 +58,22 @@ public class BroadcastMessageReaction extends ListenerAdapter {
                 // Write the message in the defined channels
                 for (String channel_id : item.broadcast_target_channel) {
                     TextChannel textChannel = event.getGuild().getTextChannelById(channel_id);
-                    textChannel.sendMessage(new EmbedBuilder()
-                                    .setTitle(Config.message_title)
-                                    .setColor(Color.WHITE)
-                                    .setDescription(Config.message_temp + " <@&"+ Config.broadcast_guild+">")
-                                    .build())
-                            .queue();
+                    String temp = getBroadcastGuilds();
+                    if(temp.length() == 0){
+                        textChannel.sendMessage(new EmbedBuilder()
+                                        .setTitle(Config.message_title)
+                                        .setColor(Color.WHITE)
+                                        .build())
+                                .queue();
+                    }
+                    else{
+                        textChannel.sendMessage(new EmbedBuilder()
+                                        .setTitle(Config.message_title)
+                                        .setColor(Color.WHITE)
+                                        .setDescription(Config.message_temp + " " + temp)
+                                        .build())
+                                .queue();
+                    }
                 }
             }
         }
@@ -97,6 +107,14 @@ public class BroadcastMessageReaction extends ListenerAdapter {
         builder.append("You have sent this message:\r\n");
         builder.append("Title: " + Config.message_title);
         builder.append("\r\nMessage: " + Config.message_temp);
+        return builder.toString();
+    }
+
+    private String getBroadcastGuilds(){
+        StringBuilder builder = new StringBuilder();
+        for (String item : Config.broadcast_guilds) {
+            builder.append("<@&" + item +"> ");
+        }
         return builder.toString();
     }
 }

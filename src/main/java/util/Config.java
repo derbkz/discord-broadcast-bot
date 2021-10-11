@@ -11,7 +11,7 @@ public class Config {
     public static List<String> bot_admins; // Is required for the examination of the admins
     public static String active_message = ""; // Is required to buffer valid broadcasts for a session
     public static String broadcast_channel = ""; // Is required to identify the channel for the broadcast
-    public static String broadcast_guild = ""; // Is required for the group of all clients
+    public static List<String> broadcast_guilds = new ArrayList<String>(); // Is required for the group of all clients
     public static String bot_token = ""; // Is required to connect the DiscordBot
     public static String message_temp = ""; // Is required to temporarily store a message
     public static String message_title = "Notification"; // Is required to set the title of a broadcast message
@@ -24,7 +24,7 @@ public class Config {
 
         // The loaded settings must be loaded into the config
         broadcast_channel = config.broadcast_channel;
-        broadcast_guild = config.broadcast_guild;
+        broadcast_guilds = config.broadcast_guilds;
         bot_admins = config.bot_admins;
         broadcasts = config.broadcasts;
         bot_token = config.token;
@@ -56,9 +56,9 @@ public class Config {
         if(broadcast_channel.length() == 0){
             builder.append("- You have not defined a broadcast channel in the config.\r\n");
         }
-        if(broadcast_guild.length() == 0){
-            builder.append("- You have not defined a group for the message in the config.\r\n");
-        }
+        //if(broadcast_guilds.size() == 0){
+        //    builder.append("- You have not defined a group for the message in the config.\r\n");
+        //}
         if(bot_token.length() == 0){
             builder.append("- You have not entered a token for the bot in the config.\r\n");
         }
