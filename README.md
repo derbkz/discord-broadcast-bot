@@ -41,3 +41,6 @@ Version 1.1 (20211004)
 + Only one active, cached message can now be sent
 + Detailed error messages have been added
 
+Version 1.2 (Not published yet)
++ Multiple target channels can be defined
++ Name changed in the config (token -> bot_token)
