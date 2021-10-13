@@ -10,6 +10,7 @@ import util.DiscordBroadcast;
 import util.DiscordBroadcastMessages;
 
 import java.awt.*;
+import java.io.File;
 
 public class BroadcastMessageReaction extends ListenerAdapter {
     @Override
@@ -59,18 +60,19 @@ public class BroadcastMessageReaction extends ListenerAdapter {
                 for (String channel_id : item.broadcast_target_channel) {
                     TextChannel textChannel = event.getGuild().getTextChannelById(channel_id);
                     String temp = getBroadcastGuilds();
-                    if(temp.length() == 0){
-                        textChannel.sendMessage(new EmbedBuilder()
-                                        .setTitle(Config.message_title)
-                                        .setColor(Color.WHITE)
-                                        .build())
-                                .queue();
-                    }
-                    else{
+                    if(Config.file_path.length() == 0){
                         textChannel.sendMessage(new EmbedBuilder()
                                         .setTitle(Config.message_title)
                                         .setColor(Color.WHITE)
                                         .setDescription(Config.message_temp + " " + temp)
+                                        .build())
+                                .queue();
+                    }else{
+                        textChannel.sendMessage(new EmbedBuilder()
+                                        .setTitle(Config.message_title)
+                                        .setColor(Color.WHITE)
+                                        .setDescription(Config.message_temp + " " + temp)
+                                        .setImage(Config.file_path)
                                         .build())
                                 .queue();
                     }
@@ -90,6 +92,7 @@ public class BroadcastMessageReaction extends ListenerAdapter {
                 .queue();
 
         Config.message_temp = ""; // Reset the buffer
+        Config.file_path = ""; // Reset the buffer
         // The message for the query should be removed
         messageChannel.deleteMessageById(reaction.getMessageId()).queue();
     }
@@ -107,6 +110,7 @@ public class BroadcastMessageReaction extends ListenerAdapter {
         builder.append("You have sent this message:\r\n");
         builder.append("Title: " + Config.message_title);
         builder.append("\r\nMessage: " + Config.message_temp);
+        builder.append("\r\nImage: " + (Config.file_path.length() == 0 ? "Not specified" : Config.file_path));
         return builder.toString();
     }
 

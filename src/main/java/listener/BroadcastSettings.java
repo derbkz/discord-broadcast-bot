@@ -44,7 +44,18 @@ public class BroadcastSettings extends ListenerAdapter {
                 return;
             }
             Config.message_title = message.getContentDisplay().substring(6);
-            messageChannel.sendMessage(DiscordBroadcastMessages.getConfigurationChangedMessage(message.getAuthor().getAsTag())).queue();
+            messageChannel.sendMessage(DiscordBroadcastMessages.getConfigurationChangedMessage(message.getAuthor().getAsTag(), "Title")).queue();
+            message.delete().queue();
+            return;
+        }
+
+        if(message.getContentDisplay().toLowerCase().startsWith("!image")){
+            if(message.getContentDisplay().substring(6).length() == 0){
+                messageChannel.sendMessage(DiscordBroadcastMessages.getCommandNotFound()).queue();
+                return;
+            }
+            Config.file_path = message.getContentDisplay().substring(6);
+            messageChannel.sendMessage(DiscordBroadcastMessages.getConfigurationChangedMessage(message.getAuthor().getAsTag(), "Image")).queue();
             message.delete().queue();
             return;
         }

@@ -16,11 +16,11 @@ public class DiscordBroadcastMessages {
                 .build();
     }
 
-    public static MessageEmbed getConfigurationChangedMessage(String clientName){
+    public static MessageEmbed getConfigurationChangedMessage(String clientName, String name){
         return new EmbedBuilder()
                 .setColor(Color.yellow)
                 .setTitle("⚙ Configuration changed")
-                .setDescription("You have changed the title to **" + Config.message_title + "**.")
+                .setDescription("You have changed the configuration! (" + name + ")")
                 .setFooter("Executed by " + clientName + ".")
                 .build();
     }
@@ -57,6 +57,7 @@ public class DiscordBroadcastMessages {
                 .setTitle("📌 Assistance")
                 .setDescription("The following commands are available to you:\r\n" +
                                 "!title [name] -> Give your message a title of your own\r\n" +
+                                "!image [url] -> Send a picture on the broadcast\r\n" +
                                 "!help -> Get an overview of all commands")
                 .build();
     }

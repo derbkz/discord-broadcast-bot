@@ -16,6 +16,7 @@ public class Config {
     public static String message_temp = ""; // Is required to temporarily store a message
     public static String message_title = "Notification"; // Is required to set the title of a broadcast message
     public static String error_message = ""; // All errors are saved here
+    public static String file_path = "";
 
     public static void loadConfig() throws IOException {
         String contentConfig = readConfig();
@@ -27,7 +28,7 @@ public class Config {
         broadcast_guilds = config.broadcast_guilds;
         bot_admins = config.bot_admins;
         broadcasts = config.broadcasts;
-        bot_token = config.token;
+        bot_token = config.bot_token;
         checkConfig();
     }
 

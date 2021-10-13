@@ -62,7 +62,8 @@ public class BroadcastMessage extends ListenerAdapter {
                                     .setColor(Color.red)
                                     .setTitle("📝 You want to send the following message:")
                                     .setDescription("Title: " + (Config.message_title) + "\r\n" +
-                                                    "Message: " + message.getContentDisplay())
+                                                    "Message: " + message.getContentDisplay() + "\r\n" +
+                                                    "Image: " + (Config.file_path.length() == 0 ? "Not specified" : Config.file_path))
                                     .setFooter(footer.toString())
                                     .build())
                     .queue(
