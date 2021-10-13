@@ -1,6 +1,7 @@
 package util;
 
 import com.google.gson.Gson;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -8,15 +9,15 @@ import java.util.*;
 
 public class Config {
     public static List<DiscordBroadcast> broadcasts; // All broadcast methods as a list from the config
+    public static List<String> broadcast_guilds; // Is required for the group of all clients
     public static List<String> bot_admins; // Is required for the examination of the admins
     public static String active_message = ""; // Is required to buffer valid broadcasts for a session
-    public static String broadcast_channel = ""; // Is required to identify the channel for the broadcast
-    public static List<String> broadcast_guilds = new ArrayList<String>(); // Is required for the group of all clients
-    public static String bot_token = ""; // Is required to connect the DiscordBot
-    public static String message_temp = ""; // Is required to temporarily store a message
     public static String message_title = "Notification"; // Is required to set the title of a broadcast message
+    public static String broadcast_channel = ""; // Is required to identify the channel for the broadcast
     public static String error_message = ""; // All errors are saved here
-    public static String file_path = "";
+    public static String message_temp = ""; // Is required to temporarily store a message
+    public static String bot_token = ""; // Is required to connect the DiscordBot
+    public static String file_path = ""; // Is required to buffer an image
 
     public static void loadConfig() throws IOException {
         String contentConfig = readConfig();
@@ -32,7 +33,7 @@ public class Config {
         checkConfig();
     }
 
-    private static String readConfig() throws IOException {
+    private static @NotNull String readConfig() throws IOException {
         File f = new File("bot-config.json");
         if(!f.exists()){
             System.out.println("The configuration file could not be found!\r\nThe following file is required: bot-config.json");
@@ -57,9 +58,9 @@ public class Config {
         if(broadcast_channel.length() == 0){
             builder.append("- You have not defined a broadcast channel in the config.\r\n");
         }
-        //if(broadcast_guilds.size() == 0){
-        //    builder.append("- You have not defined a group for the message in the config.\r\n");
-        //}
+        if(broadcast_guilds.size() == 0){
+            builder.append("- You have not defined a group for the message in the config.\r\n");
+        }
         if(bot_token.length() == 0){
             builder.append("- You have not entered a token for the bot in the config.\r\n");
         }
