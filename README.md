@@ -12,20 +12,15 @@ Broadcast channel is the group where you can define a broadcast.
 
 ```json
 {
-  "token": "",
+  "bot_token": "",
   "bot_admins": ["278785550935392257", "470715613669621770"],
   "broadcast_channel": "893261098076229684",
-  "broadcast_guild": "893273507054645280",
+  "broadcast_guilds": ["893273507054645280", "875662535678894130"],
   "broadcasts": [
     {
-      "broadcast_name": "All channels",
-      "broadcast_emoji": "💎",
-      "broadcast_target_channel": ["893264144629919744", "893264169271443467", "893264274166788187"]
-    },
-    {
-      "broadcast_name": "Only two",
-      "broadcast_emoji": "😍",
-      "broadcast_target_channel": ["893264144629919744", "893264169271443467"]
+      "broadcast_name": "All user",
+      "broadcast_emoji": "❤",
+      "broadcast_target_channel": ["893264144629919744", "893264169271443467", "893264274166788187", "893264295750664192", "893264321918943262"]
     }
   ]
 }
