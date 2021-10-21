@@ -41,7 +41,11 @@ Version 1.1 (20211004)
 + Only one active, cached message can now be sent
 + Detailed error messages have been added
 
-Version 1.2 (20212013)
+Version 1.2 (20211013)
 + Multiple target channels can be defined
 + Name changed in the config (token -> bot_token)
 + With the command "! Image [URL]" you can now add images in the broadcast
+
+Version 1.3 (not published yet)
++ Write the first message in the broadcast channel with instructions on how to use the bot
++ ...
