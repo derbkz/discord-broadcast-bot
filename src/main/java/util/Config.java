@@ -34,12 +34,6 @@ public class Config {
     }
 
     private static @NotNull String readConfig() throws IOException {
-        File f = new File("bot-config.json");
-        if(!f.exists()){
-            System.out.println("The configuration file could not be found!\r\nThe following file is required: bot-config.json");
-            System.in.read();
-        }
-
         InputStream is = new FileInputStream("bot-config.json");
         BufferedReader buf = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
